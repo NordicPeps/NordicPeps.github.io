@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/png" href="Colord_Lo.png">
+<title>Nordic Peps — Help Center</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+font-family:Inter,sans-serif;
+background:#050607;
+color:#f5f7f8;
+min-height:100vh;
+}
+
+body:before,body:after{
+content:"";
+position:fixed;
+width:650px;
+height:650px;
+background:#1c7198;
+filter:blur(180px);
+opacity:.12;
+z-index:-1;
+}
+
+body:before{left:-300px;top:-250px}
+body:after{
+width:600px;
+height:600px;
+right:-300px;
+bottom:-300px;
+background:#28627c;
+opacity:.1
+}
+
+header{
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:1px solid rgba(255,255,255,.07);
+background:rgba(5,6,7,.78);
+backdrop-filter:blur(20px)
+}
+
+.nav{
+max-width:1250px;
+margin:auto;
+height:76px;
+padding:0 25px;
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.logo{
+font-family:Manrope;
+font-weight:800;
+letter-spacing:2px;
+font-size:20px
+}
+
+.logo span{color:#8ed6f3}
+
+.back{
+color:#8ed6f3;
+text-decoration:none;
+font-size:11px;
+font-weight:700;
+letter-spacing:1px;
+transition:.2s
+}
+
+.back:hover{color:white}
+
+.help{
+max-width:900px;
+margin:auto;
+padding:100px 25px 120px
+}
+
+.label{
+color:#83cde9;
+font-size:11px;
+font-weight:700;
+letter-spacing:2px;
+text-transform:uppercase;
+margin-bottom:12px
+}
+
+h1{
+font-family:Manrope;
+font-size:48px;
+letter-spacing:-2px;
+margin-bottom:15px
+}
+
+.intro{
+color:#7f8992;
+font-size:14px;
+line-height:1.7;
+max-width:650px;
+margin-bottom:45px
+}
+
+.notice{
+padding:22px 24px;
+border:1px solid rgba(142,214,243,.15);
+border-radius:15px;
+background:rgba(142,214,243,.045);
+margin-bottom:45px
+}
+
+.notice strong{
+display:block;
+font-size:14px;
+margin-bottom:8px
+}
+
+.notice p{
+color:#7f8992;
+font-size:13px;
+line-height:1.65
+}
+
+.notice a{
+color:#8ed6f3;
+text-decoration:none
+}
+
+.faq-title{
+font-family:Manrope;
+font-size:25px;
+margin-bottom:18px
+}
+
+.faq{
+border:1px solid rgba(255,255,255,.07);
+border-radius:18px;
+overflow:hidden;
+background:rgba(255,255,255,.018)
+}
+
+details{
+border-bottom:1px solid rgba(255,255,255,.07)
+}
+
+details:last-child{border-bottom:0}
+
+summary{
+padding:21px 24px;
+cursor:pointer;
+font-size:14px;
+font-weight:600;
+list-style:none;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+summary::-webkit-details-marker{display:none}
+
+summary:after{
+content:"+";
+color:#8ed6f3;
+font-size:20px;
+font-weight:400
+}
+
+details[open] summary:after{content:"−"}
+
+.answer{
+padding:0 24px 22px;
+color:#737d85;
+font-size:13px;
+line-height:1.7;
+max-width:750px
+}
+
+.contact{
+margin-top:45px;
+padding:30px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.07);
+background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015))
+}
+
+.contact h2{
+font-family:Manrope;
+font-size:21px;
+margin-bottom:9px
+}
+
+.contact p{
+color:#737d85;
+font-size:13px;
+line-height:1.7;
+margin-bottom:17px
+}
+
+.email{
+display:inline-block;
+padding:11px 16px;
+border-radius:8px;
+background:white;
+color:#050607;
+text-decoration:none;
+font-size:11px;
+font-weight:800;
+transition:.25s
+}
+
+.email:hover{
+transform:translateY(-2px)
+}
+
+footer{
+border-top:1px solid rgba(255,255,255,.07);
+padding:35px 25px
+}
+
+.footer-inner{
+max-width:1250px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+color:#626b73;
+font-size:11px
+}
+
+.footer-logo{
+color:white;
+font-weight:800;
+letter-spacing:1.5px
+}
+
+@media(max-width:550px){
+.help{padding:75px 20px 90px}
+
+h1{
+font-size:38px
+}
+
+.footer-inner{
+flex-direction:column;
+gap:12px
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="nav">
+
+<div class="logo">
+NORDIC <span>PEPS</span>
+</div>
+
+<a href="index.html" class="back">← BACK TO STORE</a>
+
+</div>
+</header>
+
+<main class="help">
+
+<div class="label">Customer Support</div>
+
+<h1>Help Center</h1>
+
+<p class="intro">
+Need help with your order? Find answers to some of the most common questions below.
+</p>
+
+<div class="notice">
+
+<strong>Can't see your order receipt?</strong>
+
+<p>
+If you have completed your order but can't find your receipt or confirmation email,
+please check your <strong>spam or junk folder</strong>. Sometimes automated emails can
+end up there.
+</p>
+
+</div>
+
+<h2 class="faq-title">Common Questions</h2>
+
+<div class="faq">
+
+<details>
+<summary>I completed my order but didn't receive an email</summary>
+<div class="answer">
+First, check your spam or junk folder. If the email is still missing,
+make sure you entered the correct email address when placing your order.
+If you still need help, contact us using the email below.
+</div>
+</details>
+
+<details>
+<summary>Where can I find my order receipt?</summary>
+<div class="answer">
+Your order receipt is normally sent to the email address you provided during checkout.
+Please check your inbox as well as your spam or junk folder.
+</div>
+</details>
+
+<details>
+<summary>I entered the wrong email address</summary>
+<div class="answer">
+If you accidentally entered the wrong email address during checkout,
+contact our support team as soon as possible and include your order number
+so we can help you.
+</div>
+</details>
+
+<details>
+<summary>My payment went through but I have a problem with my order</summary>
+<div class="answer">
+Please contact us with your order number and explain the problem clearly.
+We'll look into the issue and help you as soon as possible.
+</div>
+</details>
+
+<details>
+<summary>How can I contact Nordic Peps?</summary>
+<div class="answer">
+For more complex questions or problems that aren't answered here,
+please email our support team at nordicpeptis@gmail.com.
+</div>
+</details>
+
+</div>
+
+<div class="contact">
+
+<h2>Still need help?</h2>
+
+<p>
+If you have a more complex problem or your question isn't answered above,
+send us an email and we'll help you with your issue.
+NordicPeptis@gmail.com</p>
+
+</div>
+
+</main>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-logo">NORDIC PEPS</div>
+<div>© 2026 Nordic Peps</div>
+</div>
+</footer>
+
+</body>
+</html>

@@ -740,6 +740,15 @@ font-size:18px
 
 }
 
+.footer-links{display:flex;align-items:center;gap:22px}
+.footer-links a{color:#8ed6f3;text-decoration:none;font-weight:700;letter-spacing:.5px;transition:.2s}
+.footer-links a:hover{color:white}
+
+@media(max-width:550px){
+.footer-links{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+
 </style>
 </head>
 
@@ -846,20 +855,18 @@ CONTINUE SHOPPING
 </div>
 
 <footer>
-
 <div class="footer-inner">
+<div class="footer-logo">NORDIC PEPS</div>
 
-<div class="footer-logo">
-NORDIC PEPS
-</div>
-
-<div>
-© 2026 Nordic Peps
+<div class="footer-links">
+<a href="help.html">HELP CENTER</a>
+<span>© 2026 Nordic Peps</span>
 </div>
 
 </div>
-
 </footer>
+
+
 
 <!-- CHECKOUT MODAL -->
 
@@ -1249,7 +1256,7 @@ alt=""
 <div class="item-info">
 
 <div class="item-category">
-Digital access
+Product
 </div>
 
 <div class="item-name">

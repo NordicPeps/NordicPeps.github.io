@@ -69,6 +69,17 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:35px 25px}
 .included-grid{grid-template-columns:1fr}
 .footer-inner{flex-direction:column;gap:12px}
 }
+
+
+.footer-links{display:flex;align-items:center;gap:22px}
+.footer-links a{color:#8ed6f3;text-decoration:none;font-weight:700;letter-spacing:.5px;transition:.2s}
+.footer-links a:hover{color:white}
+
+@media(max-width:550px){
+.footer-links{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+
 </style>
 </head>
 <body>
@@ -99,11 +110,11 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:35px 25px}
 <img src="image.png" class="course-image" alt="Course">
 </div>
 <div class="product-info">
-<div class="product-category">Digital Course</div>
+<div class="product-category">Singular Peptide</div>
 <h3>Melanotan II (MT2) — 10 mg</h3>
 <p class="product-description">10 mg of Melanotan II (MT2) with a stated purity of 99%.</p>
 <div class="product-bottom">
-<div class="price"><small>Digital access</small><strong>199 SEK</strong></div>
+<div class="price"><small>Price</small><strong>199 SEK</strong></div>
 <button class="access-btn" onclick="addToCart('mt2','Melanotan II (MT2) — 10 mg',199)">ADD TO CART</button>
 </div>
 </div>
@@ -116,11 +127,11 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:35px 25px}
 <img src="image.png" class="course-image" alt="Course">
 </div>
 <div class="product-info">
-<div class="product-category">Digital Course</div>
+<div class="product-category">Singular Peptide</div>
 <h3>Retatrutide (Reta) — 5 mg</h3>
 <p class="product-description">5 mg of Retatrutide with a stated purity of 99%.</p>
 <div class="product-bottom">
-<div class="price"><small>Digital access</small><strong>299 SEK</strong></div>
+<div class="price"><small>Price</small><strong>299 SEK</strong></div>
 <button class="access-btn" onclick="addToCart('reta','Retatrutide (Reta) — 5 mg',299)">ADD TO CART</button>
 </div>
 </div>
@@ -133,11 +144,11 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:35px 25px}
 <img src="image.png" class="course-image" alt="Course">
 </div>
 <div class="product-info">
-<div class="product-category">Digital Library</div>
+<div class="product-category">Singular Peptide</div>
 <h3>GHK-Cu — 100 mg</h3>
 <p class="product-description">100 mg of GHK-Cu (Copper Tripeptide) with a stated purity of 99%.</p>
 <div class="product-bottom">
-<div class="price"><small>Digital access</small><strong>499 SEK</strong></div>
+<div class="price"><small>Price</small><strong>499 SEK</strong></div>
 <button class="access-btn" onclick="addToCart('ghkcu','GHK-Cu — 100 mg',499)">ADD TO CART</button>
 </div>
 </div>
@@ -183,9 +194,16 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:35px 25px}
 <footer>
 <div class="footer-inner">
 <div class="footer-logo">NORDIC PEPS</div>
-<div>© 2026 Nordic Peps</div>
+
+<div class="footer-links">
+<a href="help.html">HELP CENTER</a>
+<span>© 2026 Nordic Peps</span>
+</div>
+
 </div>
 </footer>
+
+
 
 <script>
 let cart=JSON.parse(localStorage.getItem("nordicCart")||"[]");
