@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Nordic Peps — Cart</title>
+<link rel="icon" type="image/png" href="Colord_Lo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AZbNFsn-Hud08kPGHbMJGELFh4q1fPco5656jTQVOzuEEJw_z78qowNGBRE5fnuBbXxt5VVtIJePStVq&currency=SEK"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box
+}
+
+html{
+scroll-behavior:smooth
+}
+
+body{
+font-family:Inter,sans-serif;
+background:#050607;
+color:#f5f7f8;
+min-height:100vh
+}
+
+body:before,
+body:after{
+content:"";
+position:fixed;
+width:650px;
+height:650px;
+background:#1c7198;
+filter:blur(180px);
+opacity:.12;
+z-index:-1
+}
+
+body:before{
+left:-300px;
+top:-250px
+}
+
+body:after{
+width:600px;
+height:600px;
+right:-300px;
+bottom:-300px;
+background:#28627c;
+opacity:.1
+}
+
+header{
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:1px solid rgba(255,255,255,.07);
+background:rgba(5,6,7,.78);
+backdrop-filter:blur(20px)
+}
+
+.nav{
+max-width:1250px;
+margin:auto;
+height:76px;
+padding:0 25px;
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.logo{
+font-family:Manrope;
+font-weight:800;
+letter-spacing:2px;
+font-size:20px
+}
+
+.logo span{
+color:#8ed6f3
+}
+
+.back{
+color:#7c878f;
+text-decoration:none;
+font-size:11px;
+transition:.2s
+}
+
+.back:hover{
+color:white
+}
+
+.cart-page{
+max-width:1000px;
+margin:auto;
+padding:90px 25px 110px
+}
+
+.heading{
+margin-bottom:40px
+}
+
+.section-label{
+color:#83cde9;
+font-size:11px;
+font-weight:700;
+letter-spacing:2px;
+text-transform:uppercase;
+margin-bottom:10px
+}
+
+.heading h1{
+font-family:Manrope;
+font-size:42px;
+letter-spacing:-2px
+}
+
+.heading p{
+color:#707981;
+font-size:13px;
+margin-top:9px
+}
+
+.cart-box{
+background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+overflow:hidden
+}
+
+.cart-header{
+padding:22px 25px;
+border-bottom:1px solid rgba(255,255,255,.07);
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.cart-header h2{
+font-family:Manrope;
+font-size:17px
+}
+
+.cart-header span{
+font-size:10px;
+color:#68727b;
+text-transform:uppercase;
+letter-spacing:1px
+}
+
+.cart-items{
+padding:8px 25px
+}
+
+.cart-item{
+display:flex;
+align-items:center;
+gap:17px;
+padding:20px 0;
+border-bottom:1px solid rgba(255,255,255,.06)
+}
+
+.cart-item:last-child{
+border-bottom:0
+}
+
+.item-image{
+width:70px;
+height:70px;
+border-radius:12px;
+background:
+radial-gradient(circle at center,rgba(66,143,173,.15),transparent 60%),
+#090b0d;
+display:grid;
+place-items:center;
+flex-shrink:0
+}
+
+.item-image img{
+width:52px;
+height:52px;
+object-fit:contain
+}
+
+.item-info{
+flex:1;
+min-width:0
+}
+
+.item-category{
+font-size:9px;
+text-transform:uppercase;
+letter-spacing:1.4px;
+color:#68737c;
+margin-bottom:6px
+}
+
+.item-name{
+font-family:Manrope;
+font-size:15px;
+font-weight:700;
+margin-bottom:6px
+}
+
+.item-price{
+font-size:11px;
+color:#68737c
+}
+
+.item-actions{
+display:flex;
+align-items:center;
+gap:8px
+}
+
+.quantity-control{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.qty-btn{
+width:30px;
+height:30px;
+border-radius:7px;
+border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.03);
+color:white;
+cursor:pointer;
+font-size:15px
+}
+
+.qty{
+font-size:11px;
+min-width:14px;
+text-align:center
+}
+
+.item-total{
+font-size:13px;
+font-weight:700;
+min-width:75px;
+text-align:right
+}
+
+.remove{
+background:none;
+border:0;
+color:#555f67;
+cursor:pointer;
+font-size:10px;
+transition:.2s
+}
+
+.remove:hover{
+color:#ff8585
+}
+
+.cart-footer{
+padding:25px;
+border-top:1px solid rgba(255,255,255,.07);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:25px
+}
+
+.total-label{
+font-size:10px;
+color:#68727b;
+text-transform:uppercase;
+letter-spacing:1px;
+margin-bottom:4px
+}
+
+.total{
+font-family:Manrope;
+font-size:25px;
+font-weight:800
+}
+
+.pay-continue{
+border:0;
+padding:14px 24px;
+border-radius:9px;
+background:white;
+color:#050607;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
+transition:.25s;
+min-width:170px
+}
+
+.pay-continue:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 30px rgba(255,255,255,.08)
+}
+
+.empty{
+text-align:center;
+padding:80px 20px
+}
+
+.empty h2{
+font-family:Manrope;
+font-size:25px;
+margin-bottom:10px
+}
+
+.empty p{
+color:#68737c;
+font-size:13px;
+margin-bottom:22px
+}
+
+.shop-btn{
+display:inline-block;
+padding:12px 18px;
+border-radius:8px;
+background:white;
+color:#050607;
+text-decoration:none;
+font-size:10px;
+font-weight:800
+}
+
+/* MODAL */
+
+.modal-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(12px);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:5000
+}
+
+.modal-overlay.open{
+display:flex
+}
+
+.modal{
+width:100%;
+max-width:620px;
+max-height:92vh;
+overflow-y:auto;
+background:#090b0d;
+border:1px solid rgba(255,255,255,.1);
+border-radius:22px;
+box-shadow:0 30px 100px rgba(0,0,0,.65);
+animation:modalIn .22s ease
+}
+
+@keyframes modalIn{
+
+from{
+opacity:0;
+transform:translateY(12px) scale(.98)
+}
+
+to{
+opacity:1;
+transform:none
+}
+
+}
+
+.modal-top{
+padding:25px 28px;
+border-bottom:1px solid rgba(255,255,255,.07);
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.modal-title{
+font-family:Manrope;
+font-size:20px;
+font-weight:800
+}
+
+.modal-subtitle{
+font-size:10px;
+color:#68737c;
+margin-top:5px
+}
+
+.close{
+width:34px;
+height:34px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.03);
+color:#9ca4aa;
+cursor:pointer;
+font-size:18px
+}
+
+.modal-body{
+padding:28px
+}
+
+.form-section{
+margin-bottom:27px
+}
+
+.form-section:last-child{
+margin-bottom:0
+}
+
+.form-heading{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:16px
+}
+
+.form-number{
+width:24px;
+height:24px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:rgba(142,214,243,.1);
+border:1px solid rgba(142,214,243,.2);
+color:#8ed6f3;
+font-size:10px;
+font-weight:800
+}
+
+.form-heading h3{
+font-size:12px;
+font-weight:700
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:13px
+}
+
+.field{
+display:flex;
+flex-direction:column;
+gap:6px
+}
+
+.field.full{
+grid-column:1/-1
+}
+
+.field label{
+font-size:9px;
+font-weight:700;
+letter-spacing:.7px;
+text-transform:uppercase;
+color:#737d85
+}
+
+.field input,
+.field select,
+.field textarea{
+width:100%;
+height:44px;
+border-radius:8px;
+border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.035);
+color:#fff;
+outline:none;
+padding:0 12px;
+font-family:Inter;
+font-size:11px;
+transition:.2s
+}
+
+.field textarea{
+height:75px;
+padding:12px;
+resize:vertical
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+border-color:rgba(142,214,243,.45);
+background:rgba(142,214,243,.04)
+}
+
+.field input::placeholder,
+.field textarea::placeholder{
+color:#4f5961
+}
+
+.field select option{
+background:#0a0c0e;
+color:white
+}
+
+.pay-area{
+margin-top:28px;
+padding-top:25px;
+border-top:1px solid rgba(255,255,255,.07)
+}
+
+.pay-heading{
+font-family:Manrope;
+font-size:15px;
+margin-bottom:6px
+}
+
+.pay-description{
+font-size:10px;
+line-height:1.6;
+color:#68737c;
+margin-bottom:15px
+}
+
+#paypal-button-container{
+min-height:48px
+}
+
+.error{
+display:none;
+margin-top:12px;
+padding:11px 13px;
+border-radius:8px;
+border:1px solid rgba(255,80,80,.15);
+background:rgba(255,80,80,.05);
+color:#ff9b9b;
+font-size:10px;
+line-height:1.5
+}
+
+/* SUCCESS */
+
+.success{
+display:none;
+max-width:600px;
+margin:110px auto;
+padding:0 25px;
+text-align:center
+}
+
+.success-icon{
+width:65px;
+height:65px;
+border-radius:50%;
+margin:0 auto 24px;
+display:grid;
+place-items:center;
+border:1px solid rgba(142,214,243,.25);
+background:rgba(142,214,243,.1);
+color:#8ed6f3;
+font-size:25px
+}
+
+.success h1{
+font-family:Manrope;
+font-size:34px;
+margin-bottom:12px
+}
+
+.success p{
+color:#707981;
+font-size:13px;
+line-height:1.7
+}
+
+.order-id{
+display:inline-block;
+margin:24px 0;
+padding:12px 18px;
+border-radius:9px;
+border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.03);
+font-family:monospace;
+font-size:13px;
+color:#8ed6f3
+}
+
+footer{
+border-top:1px solid rgba(255,255,255,.07);
+padding:35px 25px
+}
+
+.footer-inner{
+max-width:1000px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+color:#626b73;
+font-size:11px
+}
+
+.footer-logo{
+color:white;
+font-weight:800;
+letter-spacing:1.5px
+}
+
+@media(max-width:600px){
+
+.nav{
+height:68px;
+padding:0 16px
+}
+
+.logo{
+font-size:17px
+}
+
+.cart-page{
+padding:55px 15px 70px
+}
+
+.heading h1{
+font-size:34px
+}
+
+.cart-header{
+padding:18px
+}
+
+.cart-items{
+padding:5px 18px
+}
+
+.cart-item{
+gap:11px
+}
+
+.item-image{
+width:55px;
+height:55px
+}
+
+.item-image img{
+width:42px;
+height:42px
+}
+
+.item-name{
+font-size:12px
+}
+
+.item-price{
+font-size:9px
+}
+
+.item-actions{
+flex-direction:column;
+align-items:flex-end;
+gap:7px
+}
+
+.item-total{
+min-width:auto;
+font-size:11px
+}
+
+.cart-footer{
+padding:20px 18px;
+flex-direction:column;
+align-items:stretch
+}
+
+.pay-continue{
+width:100%;
+height:48px
+}
+
+.modal-overlay{
+padding:0;
+align-items:flex-end
+}
+
+.modal{
+max-width:none;
+max-height:94vh;
+border-radius:20px 20px 0 0
+}
+
+.modal-top{
+padding:20px
+}
+
+.modal-body{
+padding:20px
+}
+
+.form-grid{
+grid-template-columns:1fr
+}
+
+.field.full{
+grid-column:auto
+}
+
+.footer-inner{
+flex-direction:column;
+gap:12px
+}
+
+}
+
+@media(max-width:380px){
+
+.item-image{
+display:none
+}
+
+.item-actions{
+display:none
+}
+
+.item-total{
+font-size:10px
+}
+
+.modal-title{
+font-size:18px
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="nav">
+
+<div class="logo">
+NORDIC <span>PEPS</span>
+</div>
+
+<a href="index.html" class="back">
+← Continue shopping
+</a>
+
+</div>
+
+</header>
+
+<main class="cart-page" id="cartPage">
+
+<div class="heading">
+
+<div class="section-label">
+Your selection
+</div>
+
+<h1>Your Cart.</h1>
+
+<p>
+Review your order before continuing to checkout.
+</p>
+
+</div>
+
+<div class="cart-box">
+
+<div class="cart-header">
+
+<h2>
+Order summary
+</h2>
+
+<span id="itemCount">
+0 items
+</span>
+
+</div>
+
+<div class="cart-items" id="cartItems"></div>
+
+<div class="cart-footer">
+
+<div>
+
+<div class="total-label">
+Total
+</div>
+
+<div class="total" id="cartTotal">
+0 SEK
+</div>
+
+</div>
+
+<button class="pay-continue" onclick="openCheckout()">
+PAY & CONTINUE
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+<div class="success" id="successPage">
+
+<div class="success-icon">
+✓
+</div>
+
+<h1>
+Order confirmed.
+</h1>
+
+<p>
+Your payment has been successfully completed and your order has been received.
+</p>
+
+<p>
+A confirmation has been sent to your email address.
+</p>
+
+<div class="order-id" id="successOrderId"></div>
+
+<br>
+
+<a href="index.html" class="shop-btn">
+CONTINUE SHOPPING
+</a>
+
+</div>
+
+<footer>
+
+<div class="footer-inner">
+
+<div class="footer-logo">
+NORDIC PEPS
+</div>
+
+<div>
+© 2026 Nordic Peps
+</div>
+
+</div>
+
+</footer>
+
+<!-- CHECKOUT MODAL -->
+
+<div class="modal-overlay" id="checkoutModal">
+
+<div class="modal">
+
+<div class="modal-top">
+
+<div>
+
+<div class="modal-title">
+Complete your order
+</div>
+
+<div class="modal-subtitle">
+Enter your details before payment
+</div>
+
+</div>
+
+<button class="close" onclick="closeCheckout()">
+×
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<form id="checkoutForm">
+
+<div class="form-section">
+
+<div class="form-heading">
+
+<div class="form-number">
+1
+</div>
+
+<h3>
+Contact information
+</h3>
+
+</div>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>
+First name *
+</label>
+
+<input
+id="firstName"
+type="text"
+placeholder="First name"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label>
+Last name *
+</label>
+
+<input
+id="lastName"
+type="text"
+placeholder="Last name"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label>
+Email *
+</label>
+
+<input
+id="email"
+type="email"
+placeholder="you@example.com"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label>
+Phone *
+</label>
+
+<input
+id="phone"
+type="tel"
+placeholder="070 123 4567"
+required
+>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="form-section">
+
+<div class="form-heading">
+
+<div class="form-number">
+2
+</div>
+
+<h3>
+Delivery information
+</h3>
+
+</div>
+
+<div class="form-grid">
+
+<div class="field full">
+
+<label>
+Street address *
+</label>
+
+<input
+id="address"
+type="text"
+placeholder="Street name and house number"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label>
+Apartment / Unit
+</label>
+
+<input
+id="apartment"
+type="text"
+placeholder="Optional"
+>
+
+</div>
+
+<div class="field">
+
+<label>
+Postal code *
+</label>
+
+<input
+id="postalCode"
+type="text"
+placeholder="211 20"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label>
+City *
+</label>
+
+<input
+id="city"
+type="text"
+placeholder="Malmö"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label>
+Country *
+</label>
+
+<select id="country" required>
+
+<option value="">
+Select country
+</option>
+
+<option>
+Sweden
+</option>
+
+<option>
+Denmark
+</option>
+
+<option>
+Norway
+</option>
+
+<option>
+Finland
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="form-section">
+
+<div class="form-heading">
+
+<div class="form-number">
+3
+</div>
+
+<h3>
+Additional information
+</h3>
+
+</div>
+
+<div class="field">
+
+<label>
+Order note
+</label>
+
+<textarea
+id="note"
+placeholder="Optional message about your order"
+></textarea>
+
+</div>
+
+</div>
+
+<div class="pay-area">
+
+<div class="pay-heading">
+Payment
+</div>
+
+<div class="pay-description">
+Review your information above, then continue securely with PayPal.
+</div>
+
+<div id="paypal-button-container"></div>
+
+<div id="error" class="error"></div>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+emailjs.init("B8IINZ3MoDAgCU58v");
+
+/* LOAD CART */
+
+let cart=JSON.parse(
+localStorage.getItem("nordicCart")||"[]"
+);
+
+const cartItems=
+document.getElementById("cartItems");
+
+const cartTotal=
+document.getElementById("cartTotal");
+
+const itemCount=
+document.getElementById("itemCount");
+
+/* TOTAL */
+
+function getTotal(){
+
+return cart.reduce((sum,item)=>{
+
+return sum+
+(Number(item.price)*
+Number(item.quantity));
+
+},0);
+
+}
+
+/* COUNT */
+
+function getCount(){
+
+return cart.reduce((sum,item)=>{
+
+return sum+
+Number(item.quantity);
+
+},0);
+
+}
+
+/* SAVE */
+
+function saveCart(){
+
+localStorage.setItem(
+"nordicCart",
+JSON.stringify(cart)
+);
+
+renderCart();
+
+}
+
+/* RENDER */
+
+function renderCart(){
+
+if(!cart.length){
+
+document.getElementById(
+"cartPage"
+).innerHTML=`
+
+<div class="empty">
+
+<h2>
+Your cart is empty.
+</h2>
+
+<p>
+Add something from the store before continuing.
+</p>
+
+<a href="index.html" class="shop-btn">
+BACK TO STORE
+</a>
+
+</div>
+
+`;
+
+return;
+
+}
+
+cartItems.innerHTML="";
+
+cart.forEach((item,index)=>{
+
+const el=
+document.createElement("div");
+
+el.className="cart-item";
+
+el.innerHTML=`
+
+<div class="item-image">
+
+<img
+src="image.png"
+alt=""
+>
+
+</div>
+
+<div class="item-info">
+
+<div class="item-category">
+Digital access
+</div>
+
+<div class="item-name">
+${escapeHtml(item.name)}
+</div>
+
+<div class="item-price">
+${Number(item.price).toFixed(0)} SEK each
+</div>
+
+</div>
+
+<div class="item-actions">
+
+<div class="quantity-control">
+
+<button
+class="qty-btn"
+onclick="changeQuantity(${index},-1)"
+>
+−
+</button>
+
+<span class="qty">
+${item.quantity}
+</span>
+
+<button
+class="qty-btn"
+onclick="changeQuantity(${index},1)"
+>
++
+</button>
+
+</div>
+
+<button
+class="remove"
+onclick="removeItem(${index})"
+>
+REMOVE
+</button>
+
+</div>
+
+<div class="item-total">
+
+${(
+Number(item.price)*
+Number(item.quantity)
+).toFixed(0)} SEK
+
+</div>
+
+`;
+
+cartItems.appendChild(el);
+
+});
+
+const count=getCount();
+
+itemCount.textContent=
+count+
+(count===1?" item":" items");
+
+cartTotal.textContent=
+getTotal().toFixed(0)+
+" SEK";
+
+}
+
+/* QUANTITY */
+
+function changeQuantity(index,amount){
+
+cart[index].quantity+=amount;
+
+if(cart[index].quantity<=0){
+
+cart.splice(index,1);
+
+}
+
+saveCart();
+
+}
+
+/* REMOVE */
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+saveCart();
+
+}
+
+/* ESCAPE HTML */
+
+function escapeHtml(str){
+
+return String(str)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+/* OPEN CHECKOUT */
+
+function openCheckout(){
+
+if(!cart.length){
+return;
+}
+
+document
+.getElementById("checkoutModal")
+.classList.add("open");
+
+document.body.style.overflow="hidden";
+
+}
+
+/* CLOSE CHECKOUT */
+
+function closeCheckout(){
+
+document
+.getElementById("checkoutModal")
+.classList.remove("open");
+
+document.body.style.overflow="";
+
+}
+
+/* CLOSE BY BACKGROUND */
+
+document
+.getElementById("checkoutModal")
+.addEventListener(
+"click",
+function(e){
+
+if(e.target===this){
+
+closeCheckout();
+
+}
+
+}
+);
+
+/* FORM VALIDATION */
+
+function validateForm(){
+
+const form=
+document.getElementById("checkoutForm");
+
+if(!form.checkValidity()){
+
+form.reportValidity();
+
+return false;
+
+}
+
+document.getElementById(
+"error"
+).style.display="none";
+
+return true;
+
+}
+
+/* ERROR */
+
+function showError(message){
+
+const error=
+document.getElementById("error");
+
+error.textContent=message;
+
+error.style.display="block";
+
+}
+
+/* CUSTOMER */
+
+function getCustomerData(){
+
+return{
+
+first_name:
+document
+.getElementById("firstName")
+.value.trim(),
+
+last_name:
+document
+.getElementById("lastName")
+.value.trim(),
+
+customer_name:
+document
+.getElementById("firstName")
+.value.trim()
++
+" "
++
+document
+.getElementById("lastName")
+.value.trim(),
+
+customer_email:
+document
+.getElementById("email")
+.value.trim(),
+
+phone:
+document
+.getElementById("phone")
+.value.trim(),
+
+address:
+document
+.getElementById("address")
+.value.trim(),
+
+apartment:
+document
+.getElementById("apartment")
+.value.trim(),
+
+postal_code:
+document
+.getElementById("postalCode")
+.value.trim(),
+
+city:
+document
+.getElementById("city")
+.value.trim(),
+
+country:
+document
+.getElementById("country")
+.value,
+
+order_note:
+document
+.getElementById("note")
+.value.trim()
+
+};
+
+}
+
+/* PRODUCTS FOR EMAIL */
+
+function createItemsText(){
+
+return cart.map(item=>{
+
+const total=
+Number(item.price)*
+Number(item.quantity);
+
+return `${item.name} × ${item.quantity} — ${total.toFixed(0)} SEK`;
+
+}).join("\n");
+
+}
+
+/* SEND EMAILS */
+
+async function sendOrderEmails(
+orderId,
+paypalOrderId,
+paypalTransactionId,
+payerEmail
+){
+
+const customer=
+getCustomerData();
+
+const params={
+
+order_id:
+orderId,
+
+payment_status:
+"PAID",
+
+date:
+new Date().toLocaleString(
+"en-SE",
+{
+dateStyle:"medium",
+timeStyle:"short"
+}
+),
+
+customer_name:
+customer.customer_name,
+
+first_name:
+customer.first_name,
+
+last_name:
+customer.last_name,
+
+customer_email:
+customer.customer_email,
+
+phone:
+customer.phone,
+
+address:
+customer.address,
+
+apartment:
+customer.apartment,
+
+postal_code:
+customer.postal_code,
+
+city:
+customer.city,
+
+country:
+customer.country,
+
+order_note:
+customer.order_note,
+
+/* IMPORTANT */
+
+items_text:
+createItemsText(),
+
+item_count:
+getCount(),
+
+subtotal:
+getTotal().toFixed(2),
+
+shipping:
+"Included",
+
+total:
+getTotal().toFixed(2),
+
+currency:
+"SEK",
+
+paypal_order_id:
+paypalOrderId,
+
+paypal_transaction_id:
+paypalTransactionId,
+
+paypal_payer_email:
+payerEmail
+
+};
+
+/* ADMIN EMAIL */
+
+await emailjs.send(
+"service_ud5vane",
+"template_t45j5hp",
+params
+);
+
+/* CUSTOMER EMAIL */
+
+await emailjs.send(
+"service_ud5vane",
+"template_805hhtu",
+params
+);
+
+}
+
+/* PAYPAL */
+
+paypal.Buttons({
+
+style:{
+layout:"vertical",
+color:"white",
+shape:"rect",
+label:"paypal",
+height:48
+},
+
+onClick:function(
+data,
+actions
+){
+
+if(!validateForm()){
+
+return actions.reject();
+
+}
+
+return actions.resolve();
+
+},
+
+createOrder:function(
+data,
+actions
+){
+
+return actions.order.create({
+
+purchase_units:[{
+
+description:
+"Nordic Peps Digital Products",
+
+amount:{
+
+currency_code:"SEK",
+
+value:
+getTotal().toFixed(2)
+
+}
+
+}],
+
+application_context:{
+
+shipping_preference:
+"NO_SHIPPING"
+
+}
+
+});
+
+},
+
+onApprove:async function(
+data,
+actions
+){
+
+try{
+
+const details=
+await actions.order.capture();
+
+const capture=
+details
+.purchase_units?.[0]
+?.payments
+?.captures?.[0];
+
+const transactionId=
+capture?.id||
+"N/A";
+
+const payerEmail=
+details
+.payer
+?.email_address||
+document
+.getElementById("email")
+.value
+.trim();
+
+const orderId=
+"NP-"+
+Math.random()
+.toString(36)
+.substring(2,10)
+.toUpperCase();
+
+await sendOrderEmails(
+
+orderId,
+
+data.orderID,
+
+transactionId,
+
+payerEmail
+
+);
+
+/* CLEAR CART */
+
+localStorage.removeItem(
+"nordicCart"
+);
+
+cart=[];
+
+closeCheckout();
+
+document.getElementById(
+"cartPage"
+).style.display="none";
+
+document.getElementById(
+"successOrderId"
+).textContent=
+orderId;
+
+document.getElementById(
+"successPage"
+).style.display=
+"block";
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Payment was completed, but there was a problem sending your order confirmation. Please keep your PayPal Order ID: "+
+data.orderID
+);
+
+}
+
+},
+
+onCancel:function(){
+
+console.log(
+"PayPal checkout cancelled."
+);
+
+},
+
+onError:function(error){
+
+console.error(error);
+
+showError(
+"PayPal could not complete the payment. Please try again."
+);
+
+}
+
+}).render(
+"#paypal-button-container"
+);
+
+/* START */
+
+renderCart();
+
+</script>
+
+</body>
+</html>

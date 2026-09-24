@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="Colord_Lo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nordic Peps — Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:#050607;color:#f5f7f8}
+body:before,body:after{content:"";position:fixed;width:650px;height:650px;background:#1c7198;filter:blur(180px);opacity:.12;z-index:-1}
+body:before{left:-300px;top:-250px}
+body:after{width:600px;height:600px;right:-300px;bottom:-300px;background:#28627c;opacity:.1}
+
+header{position:sticky;top:0;z-index:1000;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(5,6,7,.78);backdrop-filter:blur(20px)}
+.nav{max-width:1250px;margin:auto;height:76px;padding:0 25px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:Manrope;font-weight:800;letter-spacing:2px;font-size:20px}
+.logo span{color:#8ed6f3}
+.nav-right{display:flex;align-items:center;gap:12px}
+.cart{width:42px;height:42px;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:grid;place-items:center;color:white;text-decoration:none;position:relative}
+.cart-count{position:absolute;right:-2px;top:-2px;width:16px;height:16px;border-radius:50%;background:#8ed6f3;color:#050607;font-size:9px;font-weight:800;display:grid;place-items:center}
+
+.products-section{max-width:1250px;margin:auto;padding:110px 25px}
+.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:45px}
+.section-label{color:#83cde9;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.section-heading h2{font-family:Manrope;font-size:42px;letter-spacing:-2px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+.product{background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;transition:.35s}
+.product:hover{transform:translateY(-8px);border-color:rgba(142,214,243,.25);box-shadow:0 25px 70px rgba(0,0,0,.3)}
+.product-image{height:280px;display:flex;justify-content:center;align-items:center;position:relative;background:radial-gradient(circle at center,rgba(66,143,173,.15),transparent 55%),#090b0d}
+.product-badge{position:absolute;top:15px;left:15px;padding:6px 10px;border-radius:6px;background:white;color:#050607;font-size:9px;font-weight:800;letter-spacing:.5px}
+.product-number{position:absolute;top:18px;right:18px;color:#4f5860;font-size:11px}
+.course-image{width:150px;height:150px;object-fit:contain;filter:drop-shadow(0 25px 40px rgba(0,0,0,.5))}
+.product-info{padding:24px}
+.product-category{color:#73808a;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:9px}
+.product h3{font-family:Manrope;font-size:21px;margin-bottom:9px}
+.product-description{color:#7f8992;font-size:13px;line-height:1.65;min-height:64px}
+.product-bottom{margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center}
+.price small{display:block;color:#68727b;font-size:10px;margin-bottom:3px}
+.price strong{font-size:21px}
+.access-btn{padding:11px 15px;border-radius:8px;background:white;color:#050607;text-decoration:none;font-size:11px;font-weight:800;transition:.25s;border:0;cursor:pointer}
+.access-btn:hover{transform:translateY(-2px)}
+
+.included{max-width:1250px;margin:auto;padding:40px 25px 110px}
+.included-box{border:1px solid rgba(255,255,255,.07);border-radius:25px;padding:55px;background:radial-gradient(circle at 80% 20%,rgba(71,153,186,.08),transparent 35%),rgba(255,255,255,.02)}
+.included h2{font-family:Manrope;font-size:35px;margin-bottom:35px}
+.included-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.included-item{padding:22px;border-radius:13px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06)}
+.check{color:#8ed6f3;font-size:18px;margin-bottom:15px}
+.included-item h4{font-size:14px;margin-bottom:7px}
+.included-item p{color:#707981;font-size:12px;line-height:1.6}
+
+footer{border-top:1px solid rgba(255,255,255,.07);padding:35px 25px}
+.footer-inner{max-width:1250px;margin:auto;display:flex;justify-content:space-between;color:#626b73;font-size:11px}
+.footer-logo{color:white;font-weight:800;letter-spacing:1.5px}
+
+@media(max-width:850px){
+.products{grid-template-columns:1fr}
+.included-grid{grid-template-columns:1fr 1fr}
+.section-heading{display:block}
+}
+@media(max-width:550px){
+.included-box{padding:30px 20px}
+.included-grid{grid-template-columns:1fr}
+.footer-inner{flex-direction:column;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="nav">
+<div class="logo">NORDIC <span>PEPS</span></div>
+<div class="nav-right">
+<a href="cart.html" class="cart">🛒<span class="cart-count">0</span></a>
+</div>
+</div>
+</header>
+
+<section class="products-section" id="courses">
+<div class="section-heading">
+<div>
+<div class="section-label">Quality guarantee</div>
+<h2>Choose your Peptide.</h2>
+</div>
+</div>
+
+<div class="products">
+
+<div class="product">
+<div class="product-image">
+<div class="product-badge">STARTER</div>
+<div class="product-number">01</div>
+<img src="image.png" class="course-image" alt="Course">
+</div>
+<div class="product-info">
+<div class="product-category">Digital Course</div>
+<h3>Melanotan II (MT2) — 10 mg</h3>
+<p class="product-description">10 mg of Melanotan II (MT2) with a stated purity of 99%.</p>
+<div class="product-bottom">
+<div class="price"><small>Digital access</small><strong>199 SEK</strong></div>
+<button class="access-btn" onclick="addToCart('mt2','Melanotan II (MT2) — 10 mg',199)">ADD TO CART</button>
+</div>
+</div>
+</div>
+
+<div class="product">
+<div class="product-image">
+<div class="product-badge">POPULAR</div>
+<div class="product-number">02</div>
+<img src="image.png" class="course-image" alt="Course">
+</div>
+<div class="product-info">
+<div class="product-category">Digital Course</div>
+<h3>Retatrutide (Reta) — 5 mg</h3>
+<p class="product-description">5 mg of Retatrutide with a stated purity of 99%.</p>
+<div class="product-bottom">
+<div class="price"><small>Digital access</small><strong>299 SEK</strong></div>
+<button class="access-btn" onclick="addToCart('reta','Retatrutide (Reta) — 5 mg',299)">ADD TO CART</button>
+</div>
+</div>
+</div>
+
+<div class="product">
+<div class="product-image">
+<div class="product-badge">ADVANCED</div>
+<div class="product-number">03</div>
+<img src="image.png" class="course-image" alt="Course">
+</div>
+<div class="product-info">
+<div class="product-category">Digital Library</div>
+<h3>GHK-Cu — 100 mg</h3>
+<p class="product-description">100 mg of GHK-Cu (Copper Tripeptide) with a stated purity of 99%.</p>
+<div class="product-bottom">
+<div class="price"><small>Digital access</small><strong>499 SEK</strong></div>
+<button class="access-btn" onclick="addToCart('ghkcu','GHK-Cu — 100 mg',499)">ADD TO CART</button>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="included" id="included">
+<div class="included-box">
+<div class="section-label">Every Peptide Includes</div>
+<h2>More than just Peptide.</h2>
+<div class="included-grid">
+
+<div class="included-item">
+<div class="check">✓</div>
+<h4>Quality guarantee</h4>
+<p>A guaranteed quality checked by third party testers</p>
+</div>
+
+<div class="included-item">
+<div class="check">✓</div>
+<h4>Fast Shipping</h4>
+<p>Recive your order within 3 bussniess days</p>
+</div>
+
+<div class="included-item">
+<div class="check">✓</div>
+<h4>Shipping Protection</h4>
+<p>Your order is protected untill its in your hands</p>
+</div>
+
+<div class="included-item">
+<div class="check">✓</div>
+<h4>Easy instruction</h4>
+<p>Beginer Frendly Starter pack which comes with every thing you need</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-logo">NORDIC PEPS</div>
+<div>© 2026 Nordic Peps</div>
+</div>
+</footer>
+
+<script>
+let cart=JSON.parse(localStorage.getItem("nordicCart")||"[]");
+
+function saveCart(){
+localStorage.setItem("nordicCart",JSON.stringify(cart));
+updateCartCount();
+}
+
+function updateCartCount(){
+document.querySelector(".cart-count").textContent=cart.reduce((a,b)=>a+b.quantity,0);
+}
+
+function addToCart(id,name,price){
+let item=cart.find(x=>x.id===id);
+if(item)item.quantity++;
+else cart.push({id,name,price,quantity:1});
+saveCart();
+}
+
+updateCartCount();
+</script>
+
+</body>
+</html>
