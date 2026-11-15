@@ -21,7 +21,17 @@ background:#050607;
 color:#f5f7f8;
 min-height:100vh;
 }
+.copyright-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity .2s ease;
+}
 
+.copyright-link:hover {
+    opacity: .7;
+}
 body:before,body:after{
 content:"";
 position:fixed;
@@ -358,8 +368,9 @@ NordicPeptis@gmail.com</p>
 <footer>
 <div class="footer-inner">
 <div class="footer-logo">NORDIC PEPS</div>
-<div>© 2026 Nordic Peps</div>
-</div>
+<div>
+    <a href="dashboard.html" class="copyright-link">© 2026 Nordic Peps</a>
+</div></div>
 </footer>
 
 </body>

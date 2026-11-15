@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nordic Peps — Influencer Dashboard</title>
+
+<link rel="icon" type="image/png" href="Colord_Lo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --background: #050607;
+  --card: #0b1013;
+  --cyan: #8ed6f3;
+  --white: #f5f8fa;
+  --muted: #8b989f;
+  --border: rgba(142,214,243,.13);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(37,112,145,.15), transparent 40%),
+    radial-gradient(ellipse at 90% 100%, rgba(37,112,145,.09), transparent 40%),
+    var(--background);
+  color: var(--white);
+  font-family: 'Manrope', sans-serif;
+}
+
+button, input {
+  font-family: inherit;
+}
+
+/* ==========================
+   LOGIN SCREEN
+========================== */
+
+#loginScreen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 390px;
+  background: rgba(11,16,19,.95);
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 38px;
+  box-shadow: 0 25px 80px rgba(0,0,0,.4);
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.logo span {
+  color: var(--cyan);
+}
+
+.login-label {
+  color: var(--cyan);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-top: 43px;
+  margin-bottom: 12px;
+}
+
+.login-card h1 {
+  font-size: 29px;
+  margin-bottom: 9px;
+}
+
+.login-card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 27px;
+}
+
+.input-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 16px 0 8px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--border);
+  background: #070b0d;
+  color: white;
+  outline: none;
+  border-radius: 8px;
+}
+
+.login-card input:focus {
+  border-color: var(--cyan);
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 23px;
+  border: none;
+  border-radius: 8px;
+  background: var(--cyan);
+  color: #061016;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.login-button:hover {
+  background: white;
+}
+
+.error {
+  color: #ff8585;
+  font-size: 12px;
+  margin-top: 13px;
+  min-height: 17px;
+}
+
+
+/* ==========================
+   DASHBOARD
+========================== */
+
+#dashboardScreen {
+  display: none;
+  min-height: 100vh;
+}
+
+.header {
+  width: 100%;
+  min-height: 76px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.logout {
+  padding: 10px 17px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.logout:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+.dashboard-container {
+  width: 88%;
+  max-width: 950px;
+  margin: 75px auto;
+}
+
+.dashboard-heading {
+  margin-bottom: 35px;
+}
+
+.dashboard-heading h1 {
+  font-size: clamp(25px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 9px;
+}
+
+.dashboard-heading p {
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+
+/* STATISTICS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 42px;
+}
+
+.stat {
+  background: linear-gradient(145deg, #0e1519, #090d10);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 0;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.stat-value {
+  color: var(--white);
+  font-size: clamp(23px, 3vw, 31px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+
+/* RECENT ORDERS */
+
+.orders-section {
+  margin-top: 10px;
+}
+
+.orders-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 19px;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+}
+
+.orders-table th {
+  text-align: left;
+  padding: 16px 19px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+
+.orders-table td {
+  padding: 17px 19px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(142,214,243,.08);
+}
+
+.orders-table tr:last-child td {
+  border-bottom: none;
+}
+
+.orders-table td:last-child {
+  color: var(--cyan);
+  font-weight: 800;
+}
+
+.empty-orders {
+  color: var(--muted) !important;
+  text-align: center;
+  padding: 25px !important;
+}
+
+.note {
+  color: #65747c;
+  font-size: 10px;
+  margin-top: 20px;
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 25px;
+  text-align: center;
+  color: #65747c;
+  font-size: 10px;
+}
+
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+
+  .dashboard-container {
+    width: 90%;
+    margin: 45px auto;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat {
+    padding: 20px;
+  }
+
+  .stat-value {
+    font-size: 27px;
+  }
+
+  .header {
+    padding: 0 5%;
+  }
+
+}
+
+@media(max-width: 420px) {
+
+  .login-card {
+    padding: 27px;
+  }
+
+  .orders-table th,
+  .orders-table td {
+    padding: 14px 12px;
+    font-size: 11px;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     LOGIN SCREEN
+===================================== -->
+
+<div id="loginScreen">
+
+  <div class="login-card">
+
+    <div class="logo">
+      NORDIC <span>PEPS</span>
+    </div>
+
+    <div class="login-label">
+      INFLUENCER PORTAL
+    </div>
+
+    <h1>Welcome back.</h1>
+
+    <p>
+      Log in to access your personal influencer dashboard.
+    </p>
+
+    <label class="input-label" for="username">
+      Username
+    </label>
+
+    <input
+      id="username"
+      type="text"
+      placeholder="Enter username"
+      autocomplete="username"
+    >
+
+    <label class="input-label" for="password">
+      Password
+    </label>
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Enter password"
+      autocomplete="current-password"
+    >
+
+    <button class="login-button" onclick="login()">
+      LOG IN
+    </button>
+
+    <div class="error" id="loginError"></div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================
+     DASHBOARD SCREEN
+     Appears immediately after login
+===================================== -->
+
+<div id="dashboardScreen">
+
+  <header class="header">
+
+    <div class="logo">
+      NORDIC <span>PEPS</span>
+    </div>
+
+    <button class="logout" onclick="logout()">
+      LOG OUT
+    </button>
+
+  </header>
+
+
+  <main class="dashboard-container">
+
+    <div class="dashboard-heading">
+
+      <h1 id="dashboardTitle">
+        NORDIC PEPS
+      </h1>
+
+      <p id="dashboardSubtitle">
+        INFLUENCER DASHBOARD
+      </p>
+
+    </div>
+
+
+    <!-- THREE STATISTICS -->
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Total orders
+        </div>
+
+        <div class="stat-value" id="totalOrders">
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Total sales
+        </div>
+
+        <div class="stat-value" id="totalSales">
+          0 kr
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label" id="commissionLabel">
+          Your commission · 15%
+        </div>
+
+        <div class="stat-value" id="totalCommission">
+          0 kr
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RECENT ORDERS -->
+
+    <section class="orders-section">
+
+      <h2 class="orders-title">
+        Recent orders
+      </h2>
+
+      <table class="orders-table">
+
+        <thead>
+
+          <tr>
+            <th>Date</th>
+            <th>Order total</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="ordersTable">
+
+        </tbody>
+
+      </table>
+
+    </section>
+
+
+    <div class="note" id="dashboardNote">
+      Illustrative figures.
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+    © 2026 Nordic Peps
+  </footer>
+
+</div>
+
+
+
+<script>
+
+
+/* ==================================================
+   1. INFLUENCER DASHBOARDS — EDIT HERE
+
+   Each influencer has their own independent screen.
+
+   username       = Login username
+   password       = Login password
+   commission     = Commission percentage
+   title          = Main heading
+   subtitle       = Small heading underneath
+   totalOrders    = Number of orders
+   totalSales     = Total sales in SEK
+   recentOrders   = Manually editable order history
+   note           = Small text at the bottom
+
+   You can change all these values manually.
+================================================== */
+
+
+const influencers = {
+
+
+  /* ---------------------------------
+     INFLUENCER 1 — ZOZO
+  --------------------------------- */
+
+  ZOZO: {
+
+    username: "ZOZO",
+    password: "123456789",
+
+    commission: 15,
+
+    title: "NORDIC PEPS",
+    subtitle: "INFLUENCER DASHBOARD",
+
+    totalOrders: 0,
+    totalSales: 0,
+
+    recentOrders: [
+/*
+      {
+        date: "15 Nov",
+        total: 299
+      },
+
+      {
+        date: "14 Nov",
+        total: 299
+      },
+
+      {
+        date: "12 Nov",
+        total: 299
+      } */
+
+    ],
+
+    note: "Dashboard."
+
+  },
+
+
+  /* ---------------------------------
+     INFLUENCER 2 — MARIAM
+  --------------------------------- */
+
+  MARIAM: {
+
+    username: "MARIAM",
+    password: "CHANGE_PASSWORD",
+
+    commission: 20,
+
+    title: "NORDIC PEPS",
+    subtitle: "INFLUENCER DASHBOARD",
+
+    totalOrders: 0,
+    totalSales: 0,
+
+    recentOrders: [],
+
+    note: "Illustrative figures."
+
+  }
+
+
+  /* ---------------------------------
+     ADD MORE INFLUENCERS BELOW
+
+     Copy an influencer section and change
+     their username, password and statistics.
+  --------------------------------- */
+
+};
+
+
+
+/* ==================================================
+   2. LOGIN FUNCTION
+================================================== */
+
+function login() {
+
+  const username = document
+    .getElementById("username")
+    .value.trim()
+    .toUpperCase();
+
+  const password = document
+    .getElementById("password")
+    .value;
+
+  const influencer = Object.values(influencers).find(person =>
+
+    person.username.toUpperCase() === username &&
+    person.password === password
+
+  );
+
+
+  if (!influencer) {
+
+    document.getElementById("loginError").textContent =
+      "Incorrect username or password.";
+
+    return;
+
+  }
+
+
+  document.getElementById("loginError").textContent = "";
+
+
+  /* Hide login */
+
+  document.getElementById("loginScreen").style.display = "none";
+
+
+  /* Show dashboard immediately */
+
+  document.getElementById("dashboardScreen").style.display = "block";
+
+
+  /* Load this influencer's own dashboard */
+
+  showDashboard(influencer);
+
+}
+
+
+
+/* ==================================================
+   3. DISPLAY INFLUENCER'S PERSONAL SCREEN
+================================================== */
+
+function showDashboard(influencer) {
+
+
+  /* Headings */
+
+  document.getElementById("dashboardTitle").textContent =
+    influencer.title;
+
+  document.getElementById("dashboardSubtitle").textContent =
+    influencer.subtitle;
+
+
+  /* Statistics */
+
+  document.getElementById("totalOrders").textContent =
+    influencer.totalOrders;
+
+  document.getElementById("totalSales").textContent =
+    formatMoney(influencer.totalSales);
+
+
+  /* Commission */
+
+  const commission =
+    influencer.totalSales * (influencer.commission / 100);
+
+  document.getElementById("commissionLabel").textContent =
+    "Your commission · " + influencer.commission + "%";
+
+  document.getElementById("totalCommission").textContent =
+    formatMoney(commission);
+
+
+  /* Recent orders */
+
+  const table = document.getElementById("ordersTable");
+
+  table.innerHTML = "";
+
+
+  if (!influencer.recentOrders.length) {
+
+    const row = document.createElement("tr");
+
+    const cell = document.createElement("td");
+
+    cell.colSpan = 2;
+    cell.className = "empty-orders";
+    cell.textContent = "No recent orders.";
+
+    row.appendChild(cell);
+    table.appendChild(row);
+
+  } else {
+
+    influencer.recentOrders.forEach(order => {
+
+      const row = document.createElement("tr");
+
+      const dateCell = document.createElement("td");
+      dateCell.textContent = order.date;
+
+      const totalCell = document.createElement("td");
+      totalCell.textContent = formatMoney(order.total);
+
+      row.appendChild(dateCell);
+      row.appendChild(totalCell);
+
+      table.appendChild(row);
+
+    });
+
+  }
+
+
+  /* Bottom note */
+
+  document.getElementById("dashboardNote").textContent =
+    influencer.note;
+
+}
+
+
+
+/* ==================================================
+   4. MONEY FORMAT
+================================================== */
+
+function formatMoney(amount) {
+
+  return Number(amount || 0).toFixed(2).replace(/\.00$/, "") + " kr";
+
+}
+
+
+
+/* ==================================================
+   5. LOG OUT
+================================================== */
+
+function logout() {
+
+  document.getElementById("dashboardScreen").style.display =
+    "none";
+
+  document.getElementById("loginScreen").style.display =
+    "flex";
+
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+
+  document.getElementById("loginError").textContent = "";
+
+}
+
+
+
+/* ==================================================
+   6. PRESS ENTER TO LOG IN
+================================================== */
+
+document.getElementById("password").addEventListener("keydown", function(event) {
+
+  if (event.key === "Enter") {
+    login();
+  }
+
+});
+
+document.getElementById("username").addEventListener("keydown", function(event) {
+
+  if (event.key === "Enter") {
+    login();
+  }
+
+});
+
+
+</script>
+
+</body>
+</html>
